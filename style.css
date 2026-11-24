@@ -1,0 +1,508 @@
+
+/* ==============================
+   SQUARE ADVENTURE - STYLE
+   ============================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: Arial, sans-serif;
+  background: #111a36;
+  color: white;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ==============================
+   KOPFZEILE
+   ============================== */
+
+.topbar {
+  width: 100%;
+  min-height: 58px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #182449;
+  border-bottom: 1px solid #30416d;
+}
+
+.brand {
+  font-size: clamp(14px, 4vw, 20px);
+  font-weight: 900;
+}
+
+.brand span {
+  color: #63d8ff;
+}
+
+.wallet {
+  background: #26365f;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+/* ==============================
+   HAUPTBEREICH
+   ============================== */
+
+main {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 14px;
+}
+
+.screen {
+  width: 100%;
+  animation: appear 0.25s ease;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==============================
+   STARTMENÜ
+   ============================== */
+
+.hero {
+  text-align: center;
+  padding: 35px 10px 25px;
+}
+
+.hero-icon {
+  font-size: 65px;
+  margin-bottom: 10px;
+}
+
+.eyebrow {
+  color: #63d8ff;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-size: clamp(30px, 8vw, 48px);
+  margin: 10px 0;
+}
+
+h2 {
+  font-size: clamp(22px, 6vw, 30px);
+}
+
+.subtitle,
+.muted {
+  color: #aebbdc;
+  line-height: 1.5;
+}
+
+button {
+  border: 0;
+  border-radius: 13px;
+  padding: 13px 17px;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+.primary {
+  background: linear-gradient(135deg, #168cff, #6b5cff);
+  box-shadow: 0 5px 18px #168cff44;
+}
+
+.secondary {
+  background: #29385f;
+}
+
+.big {
+  width: min(100%, 280px);
+  min-height: 52px;
+  margin-top: 15px;
+  font-size: 17px;
+}
+
+.menu-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin: 20px 0;
+}
+
+.menu-stats div {
+  background: #1c2a50;
+  border: 1px solid #30416d;
+  border-radius: 14px;
+  padding: 15px 5px;
+  text-align: center;
+}
+
+.menu-stats strong,
+.menu-stats small {
+  display: block;
+}
+
+.menu-stats strong {
+  font-size: 22px;
+  color: #63d8ff;
+}
+
+.menu-stats small {
+  margin-top: 5px;
+  color: #aebbdc;
+  font-size: 11px;
+}
+
+.menu-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.menu-tile {
+  min-height: 65px;
+  background: #26365f;
+  border: 1px solid #405487;
+  font-size: 16px;
+}
+
+.footer-note,
+.control-hint {
+  text-align: center;
+  color: #8999c2;
+  font-size: 12px;
+  margin-top: 22px;
+}
+
+/* ==============================
+   LEVELS UND SHOP
+   ============================== */
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.small-btn {
+  background: #29385f;
+  min-width: 42px;
+  min-height: 42px;
+  padding: 8px;
+}
+
+.level-grid,
+.skin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.level-grid button,
+.skin-grid button {
+  min-height: 65px;
+  background: #26365f;
+  border: 1px solid #405487;
+}
+
+.shop-wallet {
+  margin: 15px 0;
+  padding: 13px;
+  background: #1c2a50;
+  border-radius: 12px;
+}
+
+
+/* =====================================
+   SQUARE ADVENTURE - NEUER GAME SCREEN
+   ===================================== */
+
+/* Grundlayout während des Spiels */
+
+html.game-active,
+body.game-active {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+/* Hauptbereich */
+
+body.game-active main {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Game Screen */
+
+#game-container {
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+}
+
+#game-container.hidden {
+  display: none !important;
+}
+
+body.game-active #game-container {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 6px minmax(0, 1fr) 76px;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  padding: 10px;
+  overflow: hidden;
+  background: #111a36;
+}
+
+/* Levelanzeige */
+
+.game-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+  padding: 4px 0;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.game-top > * {
+  min-width: 0;
+}
+
+.game-coins {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Fortschrittsbalken */
+
+.progress-track {
+  width: 100%;
+  height: 6px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #29385f;
+}
+
+#level-progress {
+  width: 0%;
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #35d8ff, #7b65ff);
+}
+
+/* Spielfeld */
+
+#game-canvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #080f25;
+  line-height: 0;
+}
+
+#game-canvas canvas {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 9 / 5;
+  touch-action: none;
+}
+
+/* Steuerungsbereich */
+
+#touch-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 76px;
+  min-height: 76px;
+  padding: 4px;
+  margin: 0;
+  gap: 12px;
+  touch-action: none;
+}
+
+.move-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Steuerknöpfe */
+
+#left-btn,
+#right-btn,
+#jump-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+  padding: 0;
+  border-radius: 18px;
+  background: #263e70;
+  border: 2px solid #5275bd;
+  color: white;
+  font-size: 25px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#jump-btn {
+  background: #5146a8;
+  border-color: #8d7dff;
+}
+
+/* Steuerungshinweis ausblenden */
+
+body.game-active .control-hint {
+  display: none !important;
+}
+
+/* Scrollen und Wischbewegungen verhindern */
+
+body.game-active #game-container,
+body.game-active #game-canvas,
+body.game-active #touch-controls {
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+/* Gewinnbildschirm */
+
+#win-screen {
+  text-align: center;
+  padding: 35px 10px;
+}
+
+.win-icon {
+  font-size: 75px;
+  margin: 15px 0;
+}
+
+#win-menu-btn {
+  display: block;
+  width: min(100%, 280px);
+  margin: 12px auto;
+}
+
+/* =====================================
+   HANDY - HOCHFORMAT
+   ===================================== */
+
+@media (max-width: 600px) {
+
+  body.game-active #game-container {
+    padding: 0;
+    gap: 6px;
+    grid-template-rows: auto 5px minmax(0, 1fr) 70px;
+  }
+
+  body.game-active .game-top {
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: 12px;
+  }
+
+  body.game-active #game-canvas {
+    border-radius: 0;
+  }
+
+  body.game-active #game-canvas canvas {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    max-height: 100%;
+    aspect-ratio: 9 / 5;
+  }
+
+  body.game-active #touch-controls {
+    height: 70px;
+    min-height: 70px;
+    padding: 4px 8px;
+  }
+
+  body.game-active #left-btn,
+  body.game-active #right-btn,
+  body.game-active #jump-btn {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    min-height: 56px;
+    font-size: 23px;
+  }
+
+  body.game-active .move-buttons {
+    gap: 9px;
+  }
+}

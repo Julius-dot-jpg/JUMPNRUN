@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#111a36">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="script.js" defer></script>
+  <title>JUMPNRUN</title>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">🟦 SQUARE <span>ADVENTURE</span></div>
+  <div class="wallet">🪙 <span id="coin-count">0</span></div>
+</header>
+
+<main>
+  <section id="menu" class="screen">
+    <div class="hero">
+      <div class="hero-icon">🟦</div>
+      <p class="eyebrow">DEIN NÄCHSTES ABENTEUER</p>
+      <h1>Square Adventure</h1>
+      <p class="subtitle">Springen, sammeln und neue Welten entdecken!</p>
+      <button id="play-btn" class="primary big">▶ Spielen</button>
+    </div>
+
+    <div class="menu-stats">
+      <div><strong id="progress-text">0/10</strong><small>Level geschafft</small></div>
+      <div><strong id="menu-coins">0</strong><small>Münzen</small></div>
+      <div><strong id="skin-count">1</strong><small>Skins</small></div>
+    </div>
+
+    <div class="menu-buttons">
+      <button id="levels-btn" class="menu-tile">🗺️ <span>Level</span></button>
+      <button id="shop-btn" class="menu-tile">🎨 <span>Skin-Shop</span></button>
+    </div>
+    <p class="footer-note">10 Welten · 10 Abenteuer · Ein Ziel!</p>
+  </section>
+
+  <section id="levels-panel" class="screen hidden">
+    <div class="section-heading">
+      <h2>🗺️ Deine Welten</h2>
+      <button class="back-btn small-btn">✕</button>
+    </div>
+    <p class="muted">Schaffe ein Level, um das nächste freizuschalten.</p>
+    <div id="level-list" class="level-grid"></div>
+  </section>
+
+  <section id="shop-panel" class="screen hidden">
+    <div class="section-heading">
+      <h2>🎨 Skin-Shop</h2>
+      <button class="back-btn small-btn">✕</button>
+    </div>
+    <div class="shop-wallet">Deine Münzen: 🪙 <span id="shop-coins">0</span></div>
+    <div id="skin-list" class="skin-grid"></div>
+  </section>
+
+  <section id="game-container" class="hidden">
+    <div class="game-top">
+      <button id="exit-btn" class="small-btn">✕</button>
+      <div id="level-name">Level 1</div>
+      <div class="game-coins">🪙 <span id="run-coins">0</span></div>
+    </div>
+
+    <div class="progress-track"><div id="level-progress"></div></div>
+    <div id="game-canvas"></div>
+
+    <div id="touch-controls">
+      <div class="move-buttons">
+        <button id="left-btn">◀</button>
+        <button id="right-btn">▶</button>
+      </div>
+      <button id="jump-btn">▲</button>
+    </div>
+    <p class="control-hint">Bewegen · Springen · Münzen sammeln</p>
+  </section>
+
+  <section id="win-screen" class="screen hidden">
+    <div class="win-icon">🏆</div>
+    <p class="eyebrow">LEVEL GESCHAFFT!</p>
+    <h2 id="win-title">Super gemacht!</h2>
+    <p>Du hast <strong id="won-coins">0</strong> Münzen gesammelt!</p>
+    <button id="next-level-btn" class="primary big">Nächstes Level →</button>
+    <button id="win-menu-btn" class="secondary">Zum Hauptmenü</button>
+  </section>
+</main>
+
+</body>
+</html>
