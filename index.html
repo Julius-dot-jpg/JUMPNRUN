@@ -62,7 +62,8 @@
     <div class="game-top">
       <button id="exit-btn" class="small-btn">✕</button>
       <div id="level-name">Level 1</div>
-      <div class="game-coins">🪙 <span id="run-coins">0</span></div>
+<div id="game-timer" class="game-timer">00:00.00</div>
+<div class="game-coins">🪙 <span id="run-coins">0</span></div>
     </div>
 
     <div class="progress-track"><div id="level-progress"></div></div>
@@ -83,6 +84,11 @@
     <p class="eyebrow">LEVEL GESCHAFFT!</p>
     <h2 id="win-title">Super gemacht!</h2>
     <p>Du hast <strong id="won-coins">0</strong> Münzen gesammelt!</p>
+
+<div class="final-time">
+  <span>⏱️ Deine Zeit</span>
+  <strong id="final-time">00:00.00</strong>
+</div>
     <button id="next-level-btn" class="primary big">Nächstes Level →</button>
     <button id="win-menu-btn" class="secondary">Zum Hauptmenü</button>
   </section>

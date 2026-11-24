@@ -580,3 +580,52 @@ body.game-active #touch-controls {
 body:has(#shop-panel:not(.hidden)) .topbar {
   display: none;
 }
+
+/* =====================================
+   STOPPUHR
+   ===================================== */
+
+.game-timer {
+  color: #63d8ff;
+  font-size: 15px;
+  font-weight: 900;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+#level-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.final-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 22px auto;
+  padding: 18px;
+  max-width: 250px;
+  background: #1c2a50;
+  border: 1px solid #405487;
+  border-radius: 16px;
+}
+
+.final-time span {
+  color: #aebbdc;
+  font-size: 14px;
+}
+
+.final-time strong {
+  color: #63d8ff;
+  font-size: 32px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+  .game-timer {
+    font-size: 12px;
+  }
+}

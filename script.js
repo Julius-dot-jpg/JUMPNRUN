@@ -347,7 +347,11 @@ function loadSave() {
       return {
         totalCoins:Math.max(0,Number(s.totalCoins)||0),
         unlockedLevel:Math.min(10,Math.max(1,Number(s.unlockedLevel)||1)),
+
         completed:Math.min(10,Math.max(0,Number(s.completed)||0)),
+        bestTimes: s.bestTimes && typeof s.bestTimes === "object"
+  ? s.bestTimes
+  : {},
         ownedSkins:Array.isArray(s.ownedSkins)
           ? [...new Set(["yellow",...s.ownedSkins])]
           : ["yellow"],
@@ -357,12 +361,13 @@ function loadSave() {
   } catch(e) {}
 
   return {
-    totalCoins:0,
-    unlockedLevel:1,
-    completed:0,
-    ownedSkins:["yellow"],
-    selectedSkin:"yellow"
-  };
+  totalCoins:0,
+  unlockedLevel:1,
+  completed:0,
+  bestTimes:{},
+  ownedSkins:["yellow"],
+  selectedSkin:"yellow"
+};
 }
 
 let saveData = loadSave();
@@ -380,6 +385,35 @@ let jumpWasPressed = false;
 let currentGravityDir = 1;
 let currentGravity = 0.62;
 let gameState = "menu";
+
+// STOPPUHR
+let levelStartTime = 0;
+let levelEndTime = 0;
+let levelTimerRunning = false;
+
+function getLevelTime() {
+  const end = levelTimerRunning ? performance.now() : levelEndTime;
+  return Math.max(0, end - levelStartTime);
+}
+
+function formatStopwatch(ms) {
+  const totalHundredths = Math.floor(ms / 10);
+
+  const minutes = Math.floor(totalHundredths / 6000);
+  const seconds = Math.floor((totalHundredths % 6000) / 100);
+  const hundredths = totalHundredths % 100;
+
+  return (
+    String(minutes).padStart(2, "0") + ":" +
+    String(seconds).padStart(2, "0") + "." +
+    String(hundredths).padStart(2, "0")
+  );
+}
+
+function updateStopwatch() {
+  document.getElementById("game-timer").textContent =
+    formatStopwatch(getLevelTime());
+}
 
 const keys = { left:false, right:false, jump:false };
 
@@ -569,6 +603,15 @@ function refreshLevels() {
       ? "✓ Geschafft"
       : unlocked ? "Freigeschaltet" : "🔒 Gesperrt";
 
+    // Bestzeit anzeigen
+const bestTime = document.createElement("small");
+const savedTime = Number(saveData.bestTimes[i]);
+
+bestTime.textContent =
+  Number.isFinite(savedTime) && savedTime > 0
+    ? "🏆 Bestzeit: " + formatStopwatch(savedTime)
+    : "🏆 Noch keine Bestzeit";
+
     const button = document.createElement("button");
     button.textContent = unlocked ? "Spielen" : "Gesperrt";
     button.disabled = !unlocked;
@@ -579,7 +622,7 @@ function refreshLevels() {
       button.onclick = () => startLevel(i);
     }
 
-    card.append(art,title,status,button);
+    card.append(art,title,status,bestTime,button);
     list.appendChild(card);
   });
 }
@@ -647,6 +690,11 @@ function refreshShop() {
 
 function startLevel(index) {
 
+    // Stoppuhr neu starten
+  levelStartTime = performance.now();
+  levelEndTime = levelStartTime;
+  levelTimerRunning = true;
+
   document.documentElement.classList.add("game-active");
 document.body.classList.add("game-active");
 
@@ -654,7 +702,7 @@ document.body.classList.add("game-active");
   const data = worlds[index];
 
   platforms = data.platforms.map(p => ({
-    x:p[0], y:p[1], w:p[2], h:18, ceiling:false
+    x:p[0], y:p[1], w:p[2], h:500, ceiling:false
   }));
 
   data.ceilingPlatforms.forEach(p => {
@@ -789,6 +837,8 @@ function drawWorldEffects(world) {
 
 function draw() {
   if (gameState !== "playing") return;
+
+    updateStopwatch();
 
   const world = worlds[currentLevel];
 
@@ -1352,6 +1402,26 @@ function winLevel() {
   if (levelWon) return;
 
   levelWon = true;
+    // Stoppuhr anhalten
+  levelTimerRunning = false;
+  levelEndTime = performance.now();
+
+  updateStopwatch();
+
+  // Bestzeit speichern
+const finishedTime = getLevelTime();
+const oldBestTime = Number(saveData.bestTimes[currentLevel]);
+
+if (
+  !Number.isFinite(oldBestTime) ||
+  oldBestTime <= 0 ||
+  finishedTime < oldBestTime
+) {
+  saveData.bestTimes[currentLevel] = finishedTime;
+}
+
+  document.getElementById("final-time").textContent =
+    formatStopwatch(getLevelTime());
   gameState = "won";
   noLoop();
   resetKeys();
