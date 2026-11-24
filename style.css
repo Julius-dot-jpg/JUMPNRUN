@@ -506,3 +506,77 @@ body.game-active #touch-controls {
     gap: 9px;
   }
 }
+
+
+/* =====================================
+   WELTEN- UND SKINMENÜ VERBESSERN
+   ===================================== */
+
+/* Mehr Platz für die Menüs */
+#world-screen,
+#skin-screen,
+#worlds-screen,
+#shop-screen {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Karten gleichmäßig und mit mehr Abstand anzeigen */
+.level-grid,
+.skin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  margin-top: 22px;
+  align-items: stretch;
+}
+
+/* Karten größer und übersichtlicher */
+.level-grid button,
+.skin-grid button {
+  width: 100%;
+  min-width: 0;
+  min-height: 100px;
+  padding: 14px 8px;
+  border-radius: 15px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+
+/* Überschriften und Zurück-Buttons */
+.section-heading {
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+/* Handy */
+@media (max-width: 600px) {
+  #world-screen,
+  #skin-screen,
+  #worlds-screen,
+  #shop-screen {
+    padding: 8px;
+  }
+
+  .level-grid,
+  .skin-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .level-grid button,
+  .skin-grid button {
+    min-height: 110px;
+    padding: 12px 6px;
+    font-size: 14px;
+  }
+}
+
+body:has(#shop-panel:not(.hidden)) .topbar {
+  display: none;
+}
